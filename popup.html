@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3일 팝업</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js" integrity="sha512-aUhL2xOCrpLEuGD5f6tgHbLYEXRpYZ8G5yD+WlFrXrPy2IrWBlu6bih5C9H6qGsgqnU6mgx6KtU8TreHpASprw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        #notice_wrap {
+            width: 400px; height: 500px;
+            margin: 200px auto; padding: 0 20px;
+            display: flex; flex-flow: column nowrap;
+            justify-content: flex-end;
+            border: 1px solid #000;
+        }
+        #notice_wrap .closeWrap {}
+        #notice_wrap .closeWrap #chk {}
+        #notice_wrap .closeWrap label {}
+        #notice_wrap .closeWrap .closeBtn {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="notice_wrap">
+        <p class="closeWrap">
+            <input type="checkbox" name="chk" id="chk">
+            <label for="chk">3일동안 이 창 열지 않기</label>
+            <button type="button" class="closeBtn">닫기</button>
+        </p>
+    </div>
+    <script>
+        $('.closeBtn').on('click', function(){
+            if($('#chk').is(':checked')){
+                console.log('checked true')
+                $.cookie('popup', 'none', {expires: 3, path: '/'})
+                $('#notice_wrap').fadeOut('fast')
+            }
+        })
+
+        if($.cookie('popup') == 'none'){
+            $('#notice_wrap').hide()
+        }
+    </script>
+</body>
+</html>
